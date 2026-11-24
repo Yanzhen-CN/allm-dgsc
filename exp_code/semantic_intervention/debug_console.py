@@ -304,7 +304,7 @@ class Console(cmd.Cmd):
   def do_EOF(self,arg):print();return True
 
 
-def main():
+def main(console_class=Console):
   import jax
   import sys
   from exp_code.baselines.model_loading import load_model
@@ -338,7 +338,7 @@ def main():
   model,params,tokenizer,_=load_model(Path(previous['checkpoint']),1)
   chat=SCSampler(model=model,params=params,tokenizer=tokenizer,cache_length=previous['cache_length'],
       max_out_length=previous['max_new_tokens'],canvas_length=256,max_denoising_steps=48)
-  console=Console(chat,previous,args.output,args.idle_seconds)
+  console=console_class(chat,previous,args.output,args.idle_seconds)
   if args.verify:
     console.engine,console.initial,console.focus,console.seed=resident_checkpoint_gate(chat,previous,args.output)
     console.case_id='gsm8k:480'

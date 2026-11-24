@@ -1,0 +1,35 @@
+{
+  "protocol": "direction2-mbpp277-development-v1",
+  "run_config": "configs/debugger_run.json",
+  "case_id": "mbpp:277",
+  "expected_batch": ["mbpp:133", "mbpp:464", "mbpp:277", "mbpp:59"],
+  "expected_focus": 2,
+  "expected_seed": 100008,
+  "source": 42,
+  "target": 43,
+  "horizon": 5,
+  "neighbors": [12234, 2060, 642, 107],
+  "canvas_length": 256,
+  "max_denoising_steps": 48,
+  "eligibility": {
+    "12234": {"source_min": 0.01, "target_min": 0.01},
+    "2060": {"source_min": 0.2, "target_min": 0.0}
+  },
+  "eligibility_note": "Chosen development thresholds, not statistical guarantees. Require active focus, finite anchor logits and editable rows. Return is a stress test.",
+  "items": [
+    {"id": "t2_quote_half", "step": 2, "token": 12234, "fraction": 0.5},
+    {"id": "t2_return_half", "step": 2, "token": 2060, "fraction": 0.5},
+    {"id": "t4_quote_half", "step": 4, "token": 12234, "fraction": 0.5},
+    {"id": "t4_return_half", "step": 4, "token": 2060, "fraction": 0.5},
+    {"id": "t2_quote_full", "step": 2, "token": 12234, "fraction": 1.0},
+    {"id": "t2_return_full", "step": 2, "token": 2060, "fraction": 1.0}
+  ],
+  "walltime": {
+    "save_margin_seconds": 120,
+    "startup_estimate_seconds": 1800,
+    "probe_floor_seconds": 180,
+    "timing_safety_factor": 2.0
+  },
+  "walltime_note": "Estimates are admission checks against the actual Slurm EndTime, not an extra compute budget. Recheck before every gate, prefill and probe; use measured timings when larger.",
+  "scope": "SC only, first canvas, original batch/seed. New-session replication keeps its own baseline. No full-response benchmark accuracy. No replacement of ineligible configurations."
+}
